@@ -30,9 +30,8 @@ Route::get('/homepage', function () {
 })->name('homepage');
 
 
-Route::get('/tags', [TagController::class, 'show'])->name('tags');
-
 Route::resource('/categories', CategoryController::class);
+Route::resource('/tags', TagController::class);
 
 
 Route::get('/article/{article}', [ArticleController::class, 'show'])->name('article');

@@ -23,7 +23,15 @@ class StoreTagRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "name"=> "required|unique:tags,name",
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'A name is required',
+            'name.unique:tags,name' => 'Name must be unique',
         ];
     }
 }

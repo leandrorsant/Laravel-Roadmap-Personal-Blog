@@ -23,7 +23,15 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name"=> "required",
+            "name"=> "required|unique:categories,name"
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'A name is required',
+            'name.unique:categories,name' => 'Name must be unique',
         ];
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 class TagController extends Controller
 {
@@ -13,7 +15,8 @@ class TagController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        return view("tags", ['tags' => $tags]);
     }
 
     /**
@@ -29,7 +32,8 @@ class TagController extends Controller
      */
     public function store(StoreTagRequest $request)
     {
-        //
+        Tag::create(['name' => $request->validated()['name']]);
+        return Redirect::route('tags.index');
     }
 
     /**
@@ -37,8 +41,7 @@ class TagController extends Controller
      */
     public function show()
     {
-        $tags = Tag::all();
-        return view("tags", ['tags' => $tags]);
+        
     }
 
     /**
@@ -62,6 +65,7 @@ class TagController extends Controller
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return Redirect::route('categories.index');
     }
 }

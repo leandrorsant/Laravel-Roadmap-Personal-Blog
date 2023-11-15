@@ -32,7 +32,6 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request) : RedirectResponse
     {
-        //return json_encode($request->validated()['name']);
         $category = Category::create(['name' => $request->validated()['name']]);
         return Redirect::route('categories.index');
     }
