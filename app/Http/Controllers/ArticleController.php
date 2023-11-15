@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
+
 
 class ArticleController extends Controller
 {
@@ -27,9 +30,13 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreArticleRequest $request)
+    public function store(StoreArticleRequest $request) : RedirectResponse
     {
-        //
+        Article::create([
+            'title' => $request->validated()['title'],
+            'full_text' => $request->validated()['full_text']
+        ]);
+        return Redirect::to('/');
     }
 
     /**
@@ -59,8 +66,9 @@ class ArticleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Article $article)
+    public function destroy(Article $article) : RedirectResponse
     {
-        //
+        $article->delete();
+        return Redirect::to('/');
     }
 }

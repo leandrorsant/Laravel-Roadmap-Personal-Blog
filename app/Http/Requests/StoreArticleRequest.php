@@ -23,7 +23,8 @@ class StoreArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "title"=> "required",
+            "full_text"=> "required",
         ];
     }
 }
