@@ -35,9 +35,10 @@ class TagController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Tag $tag)
+    public function show()
     {
-        //
+        $tags = Tag::all();
+        return view("tags", ['tags' => $tags]);
     }
 
     /**

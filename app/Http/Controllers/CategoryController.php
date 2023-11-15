@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 
 class CategoryController extends Controller
 {
@@ -13,7 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::all();
+        return view("categories", compact("categories"));
     }
 
     /**
@@ -21,15 +24,17 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return 'create';
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryRequest $request)
+    public function store(StoreCategoryRequest $request) : RedirectResponse
     {
-        //
+        //return json_encode($request->validated()['name']);
+        $category = Category::create(['name' => $request->validated()['name']]);
+        return Redirect::route('categories.index');
     }
 
     /**
@@ -37,7 +42,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        //
+       return $category->name;
     }
 
     /**
@@ -59,8 +64,9 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category) : RedirectResponse
     {
-        //
+       $category->delete();
+       return Redirect::route('categories.index');
     }
 }
