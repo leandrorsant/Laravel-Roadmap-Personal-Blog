@@ -7,6 +7,8 @@ use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class ArticleController extends Controller
@@ -24,18 +26,24 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //
+        return view('articles.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreArticleRequest $request) : RedirectResponse
+    public function store(StoreArticleRequest $request)
     {
-        Article::create([
-            'title' => $request->validated()['title'],
-            'full_text' => $request->validated()['full_text']
-        ]);
+        $image = $request->file('image');
+        
+        if($image){
+            $request->validated()['image']->storePubliclyAs('public', $request->file('image')->getClientOriginalName());
+        }
+         Article::create([
+             'title' => $request->validated()['title'],
+             'full_text' => $request->validated()['full_text'],
+             'image' => $image? $request->validated()['image']->getClientOriginalName() : null
+         ]);
         return Redirect::to('/');
     }
 
@@ -68,6 +76,9 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article) : RedirectResponse
     {
+        if($article->image)
+            Storage::delete('public/'.$article->image);
+
         $article->delete();
         return Redirect::to('/');
     }

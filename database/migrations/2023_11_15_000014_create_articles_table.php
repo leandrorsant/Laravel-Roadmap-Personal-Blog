@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('full_text');
+            $table->longText('full_text');
             $table->string('image')->nullable();
             $table->foreignId('category_id')->nullable()->constrained()->onDelete('SET NULL');
             $table->timestamps();

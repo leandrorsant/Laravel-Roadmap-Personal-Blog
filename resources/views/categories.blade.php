@@ -18,8 +18,9 @@
                         <h1 class="text-center font-bold">{{ $category->name }}</h1>
                     </div>
                 </div>
+                
                 @auth
-                    @include('categories.delete', ['category'=> $category]);
+                    @include('categories.delete', ['category'=> $category])
                 @endauth
            @empty
            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -28,8 +29,6 @@
                 </div>
             </div>
            @endforelse
-            
-           
         </div>
     </div>
 </x-app-layout>

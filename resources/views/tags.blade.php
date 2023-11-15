@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 @auth
-                    @include('tags.delete', ['tag'=> $tag]);
+                    @include('tags.delete', ['tag'=> $tag])
                 @endauth
            @empty
            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -26,7 +26,6 @@
                 </div>
             </div>
            @endforelse
-           
         </div>
     </div>
 </x-app-layout>
