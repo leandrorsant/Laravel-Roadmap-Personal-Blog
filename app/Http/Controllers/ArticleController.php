@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use Illuminate\Http\RedirectResponse;
@@ -24,9 +25,9 @@ class ArticleController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(UpdateArticleRequest $request)
     {
-        return view('articles.create');
+        return view('articles.create', ['article'=> $request->article]);
     }
 
     /**
@@ -34,16 +35,28 @@ class ArticleController extends Controller
      */
     public function store(StoreArticleRequest $request)
     {
+        //return json_encode($request->id);
         $image = $request->file('image');
         
         if($image){
             $request->validated()['image']->storePubliclyAs('public', $request->file('image')->getClientOriginalName());
         }
-         Article::create([
-             'title' => $request->validated()['title'],
+        $article = Article::updateOrCreate(
+            ['id'=> $request->id],
+            ['title' => $request->validated()['title'],
              'full_text' => $request->validated()['full_text'],
              'image' => $image? $request->validated()['image']->getClientOriginalName() : null
-         ]);
+        ]);
+        
+        if($request->tags){
+            $article->tags()->sync($request->tags);
+        }
+
+        if($request->category){
+            $article->category()->associate($request->category);
+            $article->save();
+        }
+
         return Redirect::to('/');
     }
 
@@ -60,7 +73,7 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
-        //
+        return view('articles.create', ['article' => $article]);
     }
 
     /**
@@ -78,6 +91,8 @@ class ArticleController extends Controller
     {
         if($article->image)
             Storage::delete('public/'.$article->image);
+
+        $article->tags()->detach($article->tags()->get());
 
         $article->delete();
         return Redirect::to('/');

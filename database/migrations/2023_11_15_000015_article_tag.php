@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('article_tag', function (Blueprint $table) {
             $table->primary(['article_id','tag_id'])->nullable();
             $table->foreignId('article_id')->constrained();
-            //$table->primary('tag_id')->nullable();
             $table->foreignId('tag_id')->constrained()->nullable();
             $table->timestamps();
         });
