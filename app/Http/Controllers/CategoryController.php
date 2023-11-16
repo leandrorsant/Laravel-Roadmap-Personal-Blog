@@ -41,7 +41,7 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-       return $category->name;
+       return "show: ".$category->name;
     }
 
     /**
@@ -49,15 +49,17 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit', ['category'=> $category]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update(UpdateCategoryRequest $request, Category $category) : RedirectResponse
     {
-        //
+        $category->name = $request->validated()['name'];
+        $category->save();
+        return Redirect::route('categories.index');
     }
 
     /**
