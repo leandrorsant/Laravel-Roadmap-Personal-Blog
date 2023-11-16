@@ -19,11 +19,8 @@
                     @auth
                         @include('categories.edit', ['category' => $category])
                     @endauth
-
-                
-                        
-                        
-                        <h1 onClick="hello" class="text-center font-bold">{{ $category->name }}</h1>
+                    
+                    <h1 class="text-center font-bold">{{ $category->name }}</h1>
                     
                     </div>
                 </div>
