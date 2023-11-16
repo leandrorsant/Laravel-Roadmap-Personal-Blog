@@ -15,7 +15,16 @@
            @forelse ($categories as $category)
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
-                        <h1 class="text-center font-bold">{{ $category->name }}</h1>
+
+                    @auth
+                        @include('categories.edit', ['category' => $category])
+                    @endauth
+
+                
+                        
+                        
+                        <h1 onClick="hello" class="text-center font-bold">{{ $category->name }}</h1>
+                    
                     </div>
                 </div>
                 
