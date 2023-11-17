@@ -35,12 +35,6 @@
                     @method('POST')
             
                     <div>
-                        @php
-                            if($article){
-                                $article = App\Models\Article::where(['id' => $article])->first();
-                            }
-    
-                        @endphp
                         <input type="hidden" name='id' value="{{ $article ? $article->id : null}}"/>
 
                         <x-input-label for="title" :value="__('Title')" />
@@ -55,17 +49,18 @@
 
                         <div>
                             <x-input-label for="category" :value="__('Category')" />
-                            <select name='category' class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                                <option value="">Select one</option>
-                                @foreach (App\Models\Category::all() as $category)
-                                        @if ($article && $article->category()->first()->name == $category->name)
-                                            <option selected value="{{$category->id}}">{{ $category->name }}</option>
-                                        @else
-                                        <option value="{{$category->id}}">{{ $category->name }}</option>
-                                        @endif
-                                       
-                                @endforeach
-                            </select>
+                           
+                                <select name='category' class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
+                                    <option value="">Select one</option>
+                                    @foreach (App\Models\Category::all() as $category)
+                                            @if ($article && $article->category()->get()->count() && $article->category()->first()->name == $category->name)
+                                                <option selected value="{{$category->id}}">{{ $category->name }}</option>
+                                            @else
+                                            <option value="{{$category->id}}">{{ $category->name }}</option>
+                                            @endif
+                                        
+                                    @endforeach
+                                </select>
                         </div>
 
                         <div>

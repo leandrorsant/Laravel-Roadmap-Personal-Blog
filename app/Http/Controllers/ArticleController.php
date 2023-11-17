@@ -27,6 +27,7 @@ class ArticleController extends Controller
      */
     public function create(UpdateArticleRequest $request)
     {
+        
         return view('articles.create', ['article'=> $request->article]);
     }
 

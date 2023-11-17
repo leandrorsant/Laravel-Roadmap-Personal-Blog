@@ -6,8 +6,7 @@
     </x-slot>
     <div class="py-12">
 
-        
-    
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @auth
                 @include('categories.create')
@@ -34,8 +33,6 @@
                                 <form method="post" action="{{ route('categories.destroy', ['category' => $category]) }}">
                                     @csrf
                                     @method('DELETE')
-                                    
-                                    <x-text-input id="name" name="name" type="hidden" value="{{ $tag->id ?? 'null' }}" class="mt-1 block w-full" autocomplete="name" />
                                     <div class="flex items-end gap-4">
                                         <button type = 'submit' class ='w-full text-left'>
                                             Delete
