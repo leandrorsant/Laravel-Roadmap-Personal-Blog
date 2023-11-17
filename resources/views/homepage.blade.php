@@ -19,15 +19,47 @@
             @endphp
             
             @forelse ($articles as $a)
+           
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg m-2">
+                @auth
+                <x-dropdown class="z-40">
+                    <x-slot name="trigger">
+                        <div class="bg-black flex justify-between">
+                            <button class="absolute right-0 inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                                <div class="ms-1">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                            </button>
+                        </div>
+                    </x-slot>
+                    <x-slot name="content">
+                        <x-dropdown-link :href="route('articles.create', ['article'=> $a])">
+                            Edit
+                        </x-dropdown-link>
+                        <x-dropdown-link>
+                            <form method="post" action="{{ route('articles.destroy', ['article' => $a]) }}">
+                                @csrf
+                                @method('DELETE')
+                                
+                                <x-text-input id="name" name="name" type="hidden" value="{{ $tag->id ?? 'null' }}" class="mt-1 block w-full" autocomplete="name" />
+                                <div class="flex items-end gap-4">
+                                    <button type = 'submit' class ='w-full text-left'>
+                                        Delete
+                                    </button>
+                                </div>
+                            </form>
+
+                        </x-dropdown-link>
+                    </x-slot>
+                </x-dropdown>
+                @endauth
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                         
                   
 
                         <div>
-                            @auth
-                                @include('articles.edit', ['article'=> $a])
-                            @endauth
                             <h1 class="text-center"><a href="{{ route('articles.show', $a) }}"> {{ $a->title }} </a> </h1>
                             <div>{{ $a->full_text }}</div>
                             
@@ -46,9 +78,6 @@
                         @if ($a->image)
                             <img src="{{ Storage::url('public/'.$a->image) }}" />
                         @endif
-                        @auth
-                            @include('articles.delete', ['article'=> $a])
-                        @endauth
                 </div>
             </div>
               
