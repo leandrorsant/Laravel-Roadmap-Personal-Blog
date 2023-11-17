@@ -14,9 +14,6 @@
                     </a>
                 </div>
             @endauth
-            @php
-                $articles = App\Models\Article::all();
-            @endphp
             
             @forelse ($articles as $a)
             
@@ -92,7 +89,9 @@
                 </div>
             </div>
             @endforelse
+            {{ $articles->links() }}
         </div>
+       
     </div>
     
 </x-app-layout>

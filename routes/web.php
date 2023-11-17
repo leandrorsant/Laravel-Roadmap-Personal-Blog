@@ -25,9 +25,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/homepage', function () {
-    return view('homepage');
-})->name('homepage');
+Route::get('/homepage', [ArticleController::class, 'index'])->name('homepage');
 
 
 Route::resource('/categories', CategoryController::class);
