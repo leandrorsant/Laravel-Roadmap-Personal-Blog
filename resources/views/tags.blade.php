@@ -48,7 +48,7 @@
                     Edit Tag
                 </a> --}}
             @endauth
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-2">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
                         
                         <h1 class="text-center font-bold">{{ $tag->name }}</h1>
