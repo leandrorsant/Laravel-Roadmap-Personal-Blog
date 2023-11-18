@@ -55,30 +55,28 @@
                   
 
                         <div>
-                            {{-- @auth
-                                @include('articles.edit', ['article'=> $a])
-                            @endauth --}}
-                            <h1 class="text-center"><a href="{{ route('articles.show', $a) }}"> {{ $a->title }} </a> </h1>
-                            <div>{{ $a->full_text }}</div>
-                            
-                            @php
-                                $tags_array = $a->tags()->get();
-                                $tags = '';
-                                if($tags_array){
-                                    foreach ($tags_array as $t) {
-                                        $tags = $tags.$t->name." ";
+                            <h1 class="text-center text-xl mb-3 font-bold"><a href="{{ route('articles.show', $a) }}"> {{ $a->title }} </a> </h1>
+                            @if ($a->image)
+                                <img src="{{ Storage::url('public/'.$a->image) }}" />
+                            @endif
+                            <div class="m-2 whitespace-pre-line overflow-clip">
+                                {{ $a->full_text }}
+
+                                @php
+                                    $tags_array = $a->tags()->get();
+                                    $tags = '';
+                                    if($tags_array){
+                                        foreach ($tags_array as $t) {
+                                            $tags = $tags.$t->name." ";
+                                        }
                                     }
-                                }
-                            @endphp
-                            <h1>Category: {{ $a->category()->first()->name ?? '' }}</h1>
-                            <h1>{{ 'Tags: '.$tags }}</h1>
+                                @endphp
+
+                                <h1 class="font-bold">Category: {{ $a->category()->first()->name ?? '' }}</h1>
+                                <h1 class="font-bold">{{ 'Tags: '.$tags }}</h1>
+                            </div>
                         </div>
-                        @if ($a->image)
-                            <img src="{{ Storage::url('public/'.$a->image) }}" />
-                        @endif
-                        {{-- @auth
-                            @include('articles.delete', ['article'=> $a])
-                        @endauth --}}
+                       
                 </div>
             </div>
               
