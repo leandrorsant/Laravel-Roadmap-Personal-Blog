@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Category::create(['name'=>'php']);
+        //Category::create(['name'=>'php']);
     }
 
     /**

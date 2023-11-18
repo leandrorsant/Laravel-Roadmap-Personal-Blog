@@ -14,12 +14,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $category = Category::where(['id'=>'1'])->first();
-        $tag = Tag::where(['id'=>'1'])->first();
-        $article = new Article();
-        $article->save();
-        $article->category()->associate($category);
-        $article->tags()->attach($tag);
+        // $category = Category::inRandomOrder()->first();
+        // $tag = Tag::inRandomOrder()->get()->first();
+        // $article = new Article();
+        // $article->save();
+        // $article->category()->associate($category);
+        // $article->tags()->attach($tag);
     }
 
     /**

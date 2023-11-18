@@ -54,6 +54,7 @@
                 </div>
             </div>
            @endforelse
+           {{ $tags->links() }}
         </div>
     </div>
 </x-app-layout>

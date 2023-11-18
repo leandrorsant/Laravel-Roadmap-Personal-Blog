@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use App\Models\Category;
 
 class CategorySeeder extends Seeder
 {
@@ -12,6 +14,8 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Category::factory()
+        ->count(random_int(10,200))
+        ->create();
     }
 }

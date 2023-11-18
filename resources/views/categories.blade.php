@@ -60,6 +60,7 @@
                 </div>
             </div>
            @endforelse
+           {{ $categories->links() }}
         </div>
     </div>
 </x-app-layout>

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Tag::create(['name'=> 'new']);
+        //Tag::create(['name'=> 'new']);
     }
 
     /**

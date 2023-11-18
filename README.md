@@ -10,7 +10,13 @@ cd Laravel-Roadmap-Personal-Blog
 npm i
 composer install
 npm run dev
+php artisan migrate
 php artisan serve
+```
+
+If you wish to populate the database with random data:
+```
+php artisan db:seed
 ```
 
 

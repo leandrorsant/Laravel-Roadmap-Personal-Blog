@@ -60,7 +60,8 @@
                                 <img src="{{ Storage::url('public/'.$a->image) }}" />
                             @endif
                             <div class="m-2 whitespace-pre-line overflow-clip">
-                                {{ $a->full_text }}
+                                {{ substr($a->full_text, 0, 2000) }}
+                                <a href="{{ route('articles.show', $a) }}"> [Read full article] </a>
 
                                 @php
                                     $tags_array = $a->tags()->get();
@@ -72,7 +73,7 @@
                                     }
                                 @endphp
 
-                                <h1 class="font-bold">Category: {{ $a->category()->first()->name ?? '' }}</h1>
+                                <h1 id='clicked' class="font-bold">Category: {{ $a->category()->first()->name ?? '' }}</h1>
                                 <h1 class="font-bold">{{ 'Tags: '.$tags }}</h1>
                             </div>
                         </div>
@@ -91,5 +92,11 @@
         </div>
        
     </div>
-    
+
+    <script>
+        document.getElementById('clicked').addEventListener('click', function(){
+            alert('hello world')
+        })
+        </script>
+
 </x-app-layout>
