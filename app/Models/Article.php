@@ -14,11 +14,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Article extends Model
 {
     use HasFactory;
-    /*
-    $article->category()->first();
-    $article->category()->associate($category)
-    $article->tags()->attach($tag)
-    */
+   
+    protected $with = ['category', 'tags'];
+
     protected $attributes = [
         'title' =>'new article',
         'full_text' =>'new article full text',
@@ -29,6 +27,7 @@ class Article extends Model
         'full_text',
         'image'
     ];
+
 
     public function category() : BelongsTo
     {
