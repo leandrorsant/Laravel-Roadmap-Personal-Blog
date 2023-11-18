@@ -24,3 +24,4 @@ php artisan db:seed
 <img src="./screenshots/laravel-roadmap-personal-blog-screenshot1.png"/>
 <img src="./screenshots/laravel-roadmap-personal-blog-screenshot2.png"/>
 <img src="./screenshots/laravel-roadmap-personal-blog-screenshot3.png"/>
+<img src="./screenshots/laravel-roadmap-personal-blog-screenshot4.png"/>
