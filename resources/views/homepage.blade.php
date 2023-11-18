@@ -1,14 +1,23 @@
 <x-app-layout>
+    @props(['add_article' => false])
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('Articles') }}
         </h2>
     </x-slot>
 
+
+
+  
+
     <div class="py-12">
+
+        
+
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @auth
-                <div class="flex items-end justify-end">
+                <div class="flex items-end justify-end mb-2">
                     <a href="{{ route('articles.create') }}" class = 'px-4 py-2 bg-green-800 dark:bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white dark:text-white uppercase tracking-widest hover:bg-green-700 dark:hover:bg-green-500 focus:bg-green-700 dark:focus:bg-green-800 active:bg-green-900 dark:active:bg-green-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 '>
                         Create Article
                     </a>

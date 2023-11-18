@@ -4,12 +4,23 @@
             {{ __('Categories') }}
         </h2>
     </x-slot>
-    <div class="py-12">
+    <div x-data="{ open: false }" class="py-12">
 
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @auth
-                @include('categories.create')
+                <div class="flex justify-end items-end">
+                    <div class="w-fit ml-0">
+                        <div x-bind:class="! open ? 'hidden' : ''">
+                            <button x-on:click="open = ! open" class="float-right mt-2 text-white bg-gray-500 w-10 hover:bg-red-500 rounded-md">X</button>
+                            @include('categories.create')
+                        </div>
+                        
+                        <button x-bind:class="open ? 'hidden' : ''" x-on:click="open = ! open" class = ' mb-2 px-4 py-2 bg-green-800 dark:bg-green-800 border border-transparent rounded-md font-semibold text-xs text-white dark:text-white uppercase tracking-widest hover:bg-green-700 dark:hover:bg-green-500 focus:bg-green-700 dark:focus:bg-green-800 active:bg-green-900 dark:active:bg-green-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800 '>
+                            Create category
+                        </button>
+                    </div>
+                </div>
             @endauth
            @forelse ($categories as $category)
                 @auth
