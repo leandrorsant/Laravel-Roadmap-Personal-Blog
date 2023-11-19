@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ArticleResource extends ResourceCollection
 {
+    public $preserveKeys = true;
     /**
      * Transform the resource collection into an array.
      *
@@ -14,11 +15,13 @@ class ArticleResource extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
+        
         return [
-            'data' => $this->collection,
+            'data' => $this->collection->keyBy->id,
             'links' => [
                 'self' => 'link-value',
             ],
         ];
     }
+
 }
