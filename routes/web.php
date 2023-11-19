@@ -4,6 +4,8 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
+use App\Http\Resources\ArticleResource;
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +28,9 @@ Route::resource('/categories', CategoryController::class);
 Route::resource('/tags', TagController::class);
 Route::resource('/articles', ArticleController::class);
 
+Route::get('/api/articles/', function () {
+    return new ArticleResource(Article::limit(10)->get());
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
