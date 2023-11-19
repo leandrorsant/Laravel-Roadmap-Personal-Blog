@@ -29,11 +29,7 @@ Route::resource('/tags', TagController::class);
 Route::resource('/articles', ArticleController::class);
 
 Route::get('/api/articles/', function () {
-<<<<<<< HEAD
     return new ArticleResource(Article::paginate(10));
-=======
-    return new ArticleResource(Article::limit(10)->get());
->>>>>>> 45b50b94c7c39001c3e6737e288a7558ece62f30
 });
 
 Route::middleware('auth')->group(function () {
